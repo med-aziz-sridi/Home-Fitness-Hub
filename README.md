@@ -1,7 +1,7 @@
 # Home Fitness Hub 
 
 Home Fitness Hub is a web application for discovering, tracking, and managing home workouts. It supports multiple workout categories and basic progress tracking.
-![Home Fitness Hub Banner](https://i.ibb.co/v6FWg228/Capture-d-cran-2025-04-27-044245.png)
+![Home Fitness Hub Banner](https://https://i.ibb.co/v6FWg228/Capture-d-cran-2025-04-27-044245.png)
 
 ## Features
 
