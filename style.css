@@ -1,0 +1,478 @@
+:root {
+    --primary: #1a73e8;
+    --secondary: #63a4ff;
+    --bg: #f5f7fa;
+    --text: #2d3436;
+    --card-bg: white;
+    --accent: #e3eafc;
+}
+
+:root.dark-mode {
+    --bg: #1a1a2e;
+    --text: #ffffff;
+    --card-bg: #16213e;
+    --accent: #23304a;
+}
+
+body.dark-mode,
+:root.dark-mode body {
+    background: linear-gradient(135deg, var(--bg) 70%, var(--primary) 100%);
+    color: var(--text);
+}
+.workout-categories,
+.category,
+.category-content,
+.progress-tracker,
+.music-player,
+.calendar-streak {
+    background: var(--card-bg);
+    color: var(--text);
+}
+
+* {
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg) 70%, var(--primary) 100%);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 16px rgba(26,115,232,0.08);
+    min-height: 48px;
+}
+
+.main-nav {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.nav-btn {
+    background: var(--card-bg);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 18px;
+    padding: 0.3rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.nav-btn.active, .nav-btn:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    align-items: center;
+}
+
+.search-bar {
+    flex: 1;
+    padding: 0.8rem;
+    border: 2px solid var(--primary);
+    border-radius: 25px;
+}
+
+.sort-select {
+    padding: 0.8rem;
+    border: 2px solid var(--primary);
+    border-radius: 25px;
+    background: var(--card-bg);
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.btn {
+    background: var(--secondary);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(26,115,232,0.08);
+}
+
+.btn:hover {
+    background: var(--primary);
+}
+
+.workout-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100vw;
+    overflow: visible;
+    padding-bottom: 1rem;
+    background: var(--card-bg);
+    border-radius: 18px;
+    box-shadow: 0 2px 8px rgba(26,115,232,0.08);
+}
+
+.category {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-header {
+    padding: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.category-header:hover {
+    background: var(--secondary);
+    color: white;
+}
+
+.category-content {
+    display: none;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem 0;
+    background: var(--accent);
+    max-width: 100vw;
+    overflow-x: auto;
+    overflow-y: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), padding 0.3s, background 0.3s;
+    scrollbar-width: none; /* Firefox */
+}
+.category-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+.category-content.open {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    max-width: 100vw;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 1rem 0;
+    background: var(--accent);
+    scrollbar-width: none;
+}
+.category-content.open::-webkit-scrollbar {
+    display: none;
+}
+
+.video-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--primary);
+    margin-bottom: 0.5rem;
+    position: relative;
+    width: 320px;
+    min-width: 320px;
+    max-width: 340px;
+    margin-left: 0;
+    margin-right: 0;
+    flex: 0 0 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.video-card:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 6px 18px rgba(26,115,232,0.15);
+}
+
+/* Remove hover effect for exercise detail page */
+.video-card.exercise-detail:hover {
+    transform: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Widen video-card for exercise page (details) */
+.video-card.exercise-detail {
+    width: 900px;
+    min-width: 900px;
+    max-width: 1000px;
+}
+
+.video-card.completed {
+    opacity: 0.6;
+    border: 2px solid #43e87b;
+}
+
+.video-card .progress-btn,
+.video-card .favorite-btn {
+    display: none;
+}
+
+.video-iframe {
+    width: 100%;
+    height: 200px;
+    border: none;
+    border-radius: 8px;
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    background: #e3eafc;
+    display: block;
+}
+
+.video-title {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+
+.video-title:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+
+.load-more-btn {
+    display: block;
+    margin: 1rem auto 0 auto;
+    padding: 0.7rem 2rem;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.load-more-btn:hover {
+    background: var(--secondary);
+}
+
+.music-player {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 10px;
+}
+
+.progress-tracker {
+    margin: 2rem 0 1rem 0;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(26,115,232,0.08);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.progress-bar-bg {
+    width: 200px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 7px;
+    overflow: hidden;
+    margin-right: 1rem;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #43e87b 60%, #1a73e8 100%);
+    border-radius: 7px;
+    transition: width 0.4s;
+}
+
+.calendar-streak {
+    margin: 2rem 0 1rem 0;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(26,115,232,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.calendar-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.calendar-day {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--primary);
+    border: 2px solid transparent;
+    transition: background 0.2s, border 0.2s;
+}
+
+.calendar-day.done {
+    background: #43e87b;
+    color: #fff;
+    border: 2px solid #1a73e8;
+}
+
+.calendar-day.today {
+    border: 2px solid #ffb300;
+}
+
+.calendar-streak-count {
+    margin-top: 0.5rem;
+    font-weight: bold;
+    color: #43e87b;
+    font-size: 1.2rem;
+}
+
+.exercise-action-btn {
+    display: inline-block;
+    margin: 0.5rem 0.5rem 1rem 0;
+    padding: 0.6rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+
+.exercise-action-btn.favorite {
+    background: #fffbe7;
+    color: #ffb300;
+    border: 2px solid #ffb300;
+}
+.exercise-action-btn.favorite.favorited {
+    background: #ffb300;
+    color: #fff;
+    border: 2px solid #ffb300;
+}
+
+.exercise-action-btn.done {
+    background: #e7fff0;
+    color: #43e87b;
+    border: 2px solid #43e87b;
+}
+.exercise-action-btn.done.completed {
+    background: #43e87b;
+    color: #fff;
+    border: 2px solid #43e87b;
+}
+
+.exercise-nav {
+    max-width: 900px;
+    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 0;
+    z-index: 100;
+    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.exercise-nav .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    z-index: 10;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 8px rgba(26,115,232,0.08);
+    transition: background 0.2s;
+    opacity: 0.9;
+    pointer-events: auto;
+}
+.exercise-nav .nav-btn#backBtn {
+    left: 10vw;
+}
+.exercise-nav .nav-btn#nextBtn {
+    right: 10vw;
+}
+.exercise-nav .nav-btn:hover {
+    background: var(--secondary);
+}
+
+@media (max-width: 1100px) {
+    .exercise-nav .nav-btn#backBtn {
+        left: 2vw;
+    }
+    .exercise-nav .nav-btn#nextBtn {
+        right: 2vw;
+    }
+}
+@media (max-width: 768px) {
+    .category-content,
+    .category-content.open {
+        max-width: 100vw;
+        overflow-x: auto;
+        gap: 1rem;
+    }
+    .video-card {
+        width: 260px;
+        min-width: 260px;
+        max-width: 280px;
+    }
+    .exercise-nav .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    .exercise-nav .nav-btn#backBtn {
+        left: 2vw;
+    }
+    .exercise-nav .nav-btn#nextBtn {
+        right: 2vw;
+    }
+}

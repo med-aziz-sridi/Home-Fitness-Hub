@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>666</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header" style="padding:0.5rem 1rem;">
+        <h1 style="font-size:1.5rem;margin:0;">666</h1>
+        <nav class="main-nav">
+            <button class="nav-btn" id="homeBtn">Home</button>
+            <button class="nav-btn" id="allBtn">All</button>
+            <button class="nav-btn" id="favoritesBtn">Favorites</button>
+            <button class="nav-btn" id="doneBtn">Done</button>
+            <button class="nav-btn" id="notDoneBtn">Not Done</button>
+        </nav>
+        <button id="themeToggle" class="btn">🌓</button>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search workouts...">
+            <select id="sortSelect" class="sort-select">
+                <option value="default">Sort by</option>
+                <option value="name">Name</option>
+                <option value="duration">Duration</option>
+                <option value="popularity">Popularity</option>
+            </select>
+        </div>
+
+        <div id="calendarStreak" class="calendar-streak"></div>
+
+        <div id="progressTracker" class="progress-tracker"></div>
+
+        <div id="workoutCategories" class="workout-categories"></div>
+
+        <div class="music-player">
+            <h2>Workout Music Playlist</h2>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/D2CKOIiabfg?si=qbGcBEA7wL07Oetf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

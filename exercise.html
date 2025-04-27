@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>666</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header" style="padding:0.5rem 1rem;">
+        <a href="index.html" style="color:white;text-decoration:none;"><h1 style="font-size:1.5rem;margin:0;">666</h1></a>
+        <nav class="main-nav">
+            <button class="nav-btn" onclick="window.location.href='index.html'">Home</button>
+            <button class="nav-btn" onclick="window.location.href='index.html'">All</button>
+            <button class="nav-btn" onclick="window.location.href='index.html#favoritesBtn'">Favorites</button>
+            <button class="nav-btn" onclick="window.location.href='index.html#doneBtn'">Done</button>
+            <button class="nav-btn" onclick="window.location.href='index.html#notDoneBtn'">Not Done</button>
+        </nav>
+        <button id="themeToggle" class="btn">🌓</button>
+    </header>
+    <div class="container" id="exerciseContainer">
+        <!-- Content will be loaded by JS -->
+    </div>
+    <div class="exercise-nav">
+        <button id="backBtn" class="nav-btn">←</button>
+        <button id="nextBtn" class="nav-btn">→</button>
+    </div>
+    <script src="exercise.js"></script>
+    <script>
+        // Dark mode: remember in localStorage and apply on load
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const isDark = document.documentElement.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+        });
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
