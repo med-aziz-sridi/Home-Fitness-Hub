@@ -182,14 +182,14 @@ function renderExercise() {
 
     // Music player (list all mp3s in /music)
     const musicTracks = [
-        { name: "Energetic Beat", file: "music/energetic.mp3" },
-        { name: "Focus Flow", file: "music/focus.mp3" },
-        { name: "Chill Vibes", file: "music/chill.mp3" }
+        { name: "Unnamed Memories", file: "music/Unnamed Memories.mp3" },
+        { name: "Malo Tebya", file: "music/Malo Tebya.mp3" },
+        { name: "Blackout", file: "music/Blackout.mp3" }
     ];
     let musicPlayer = `
         <div style="margin:1.5rem 0;">
             <b>Workout Music:</b>
-            <select id="musicSelect">
+            <select id="musicSelect" class="music-select">
                 ${musicTracks.map((t, i) => `<option value="${t.file}">${t.name}</option>`).join('')}
             </select>
             <audio id="audioPlayer" controls style="width:100%;margin-top:0.5rem;" src="${musicTracks[0].file}">

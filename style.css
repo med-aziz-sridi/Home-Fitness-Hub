@@ -292,6 +292,47 @@ body {
     border-radius: 10px;
 }
 
+.music-player select,
+#musicSelect {
+    padding: 0.7rem 2.5rem 0.7rem 1rem;
+    border: 2px solid var(--primary);
+    border-radius: 25px;
+    background: var(--card-bg);
+    color: var(--primary);
+    font-size: 1.1rem;
+    font-weight: bold;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(26,115,232,0.08);
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.music-player select:focus,
+#musicSelect:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 2px var(--secondary);
+}
+
+.music-player select option,
+#musicSelect option {
+    background: var(--card-bg);
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+/* Add a dropdown arrow using a background SVG */
+.music-player select,
+#musicSelect {
+    background-image: url("data:image/svg+xml;charset=UTF-8,<svg width='20' height='20' viewBox='0 0 20 20' fill='${encodeURIComponent('#1a73e8')}' xmlns='http://www.w3.org/2000/svg'><path d='M5 8l5 5 5-5H5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2em;
+    padding-right: 2.5em;
+}
+
 .progress-tracker {
     margin: 2rem 0 1rem 0;
     padding: 1rem;
