@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // kol workout data mta3 l'app houni
     const fitnessContent = {
         yoga: [
             {
@@ -158,16 +159,18 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
-    // Load favorites from localStorage
+    // jib favorites mil localStorage (ki fama)
     let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
-    // Progress tracker state
+    // n7sbou workouts li kamlt'hom
     let completed = JSON.parse(localStorage.getItem('completed') || '[]');
 
+    // chkoun workout fama fi favorites
     function isFavorited(item) {
         return favorites.some(fav => fav.title === item.title && fav.type === item.type);
     }
 
+    // zid wala na7i workout mil favorites
     function toggleFavorite(item) {
         if (isFavorited(item)) {
             favorites = favorites.filter(fav => !(fav.title === item.title && fav.type === item.type));
@@ -178,21 +181,22 @@ document.addEventListener('DOMContentLoaded', () => {
         renderContent();
     }
 
+    // chkoun workout kamltou
     function isCompleted(item) {
         return completed.some(c => c.title === item.title && c.type === item.type);
     }
 
-    // Helper: get today's date string
+    // jib lyom b string (YYYY-MM-DD)
     function getTodayStr() {
         const d = new Date();
         return d.toISOString().slice(0, 10);
     }
 
-    // Calendar streak logic
+    // warri a5er 14 nhar w streak mta3ek
     function renderCalendarStreak() {
         const calendar = document.getElementById('calendarStreak');
         if (!calendar) return;
-        // Get last 14 days
+        // 3ml array mta3 a5er 14 nhar
         const days = [];
         const today = new Date();
         for (let i = 13; i >= 0; i--) {
@@ -200,16 +204,16 @@ document.addEventListener('DOMContentLoaded', () => {
             d.setDate(today.getDate() - i);
             days.push(d);
         }
-        // Get completed dates
+        // jib ayem li 5dmt fihom
         const completedDates = JSON.parse(localStorage.getItem('completedDates') || '[]');
-        // Calculate streak
+        // 7seb streak mta3ek
         let streak = 0;
         for (let i = days.length - 1; i >= 0; i--) {
             const ds = days[i].toISOString().slice(0, 10);
             if (completedDates.includes(ds)) streak++;
             else break;
         }
-        // Render
+        // warri l calendar
         let html = '<div class="calendar-row">';
         days.forEach(d => {
             const ds = d.toISOString().slice(0, 10);
@@ -222,12 +226,13 @@ document.addEventListener('DOMContentLoaded', () => {
         calendar.innerHTML = html;
     }
 
+    // 3ml workout kamltou wala la
     function toggleCompleted(item) {
         if (isCompleted(item)) {
             completed = completed.filter(c => !(c.title === item.title && c.type === item.type));
         } else {
             completed.push(item);
-            // Mark today as completed in calendar
+            // zid lyom fil streak calendar
             let completedDates = JSON.parse(localStorage.getItem('completedDates') || '[]');
             const todayStr = getTodayStr();
             if (!completedDates.includes(todayStr)) {
@@ -241,16 +246,16 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCalendarStreak();
     }
 
-    // Helper: get thumbnail or placeholder
+    // jib thumbnail wala placeholder
     function getThumbnail(item) {
         if (item.thumbnail && item.thumbnail.trim() !== "") return item.thumbnail;
         if (item.type === "video" && item.videoId)
             return `https://img.youtube.com/vi/${item.videoId}/hqdefault.jpg`;
-        // Placeholder
+        // ken ma fama chay, 3tih placeholder
         return "https://via.placeholder.com/320x180/1a73e8/ffffff?text=No+Thumbnail";
     }
 
-    // Filtering logic for navbar
+    // filter 3la workouts b buttons mta3 navbar
     let filterMode = "all";
     function filterByMode(videos, cat) {
         if (filterMode === "favorites") {
@@ -265,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return videos;
     }
 
-    // Accordion functionality with animation
+    // 3ml accordion mta3 kol categories w workouts
     function createAccordionItems(filteredContent = null, sortBy = "default") {
         const container = document.getElementById('workoutCategories');
         container.innerHTML = "";
@@ -282,10 +287,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 sortedVideos.sort((a, b) => b.views - a.views);
             }
 
-            // Apply filter mode
+            // warri ken li match m3a filter
             const filteredVideos = filterByMode(sortedVideos, category);
 
-            // Only show categories with at least one video
+            // skip ken ma fama hata video
             if (filteredVideos.length === 0) continue;
 
             const categoryElement = document.createElement('div');
@@ -304,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 videoCard.className = 'video-card';
                 if (isCompleted(video)) videoCard.classList.add('completed');
 
-                // Open exercise page on image/title click
+                // click 3la image wala title y7ell page mta3 workout
                 videoCard.innerHTML = `
                     <a href="exercise.html?cat=${category}&id=${videos.indexOf(video)}" class="video-title" style="display:block;text-decoration:none;">
                         <img class="video-thumbnail" src="${getThumbnail(video)}" alt="thumbnail" style="cursor:pointer;">
@@ -317,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentDiv.appendChild(videoCard);
             });
 
-            // Accordion toggle logic (multiple open allowed)
+            // click 3la header y7ell wala ysaker accordion
             const header = categoryElement.querySelector('.category-header');
             header.addEventListener('click', () => {
                 contentDiv.classList.toggle('open');
@@ -333,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Progress tracker UI
+    // warri progress bar w stats
     function renderProgress() {
         const tracker = document.getElementById('progressTracker');
         const total = Object.values(fitnessContent).flat().length;
@@ -348,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Search functionality (case-insensitive, filters categories and videos)
+    // search 3la workouts b title, description, wala category
     function filterContent(query) {
         if (!query.trim()) {
             renderContent();
@@ -366,14 +371,14 @@ document.addEventListener('DOMContentLoaded', () => {
         createAccordionItems(filtered, document.getElementById('sortSelect').value);
     }
 
-    // Render content with current sort
+    // render kol chay b sort w filter tawa
     function renderContent() {
         createAccordionItems(null, document.getElementById('sortSelect').value);
         renderProgress();
         renderCalendarStreak();
     }
 
-    // Dark mode: remember in localStorage and apply on load
+    // dark mode: 7ot wala na7i w 5azenha
     function setDarkMode(enabled) {
         if (enabled) {
             document.documentElement.classList.add('dark-mode');
@@ -384,26 +389,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // click 3la btn ybadel dark mode
     document.getElementById('themeToggle').addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark-mode');
         localStorage.setItem('darkMode', isDark ? 'true' : 'false');
     });
 
-    // On load, apply dark mode if set
+    // ken dark mode mkhzn, 7otou ki t7al page
     if (localStorage.getItem('darkMode') === 'true') {
         document.documentElement.classList.add('dark-mode');
     }
 
-    // Event listeners
+    // event mta3 search bar
     document.getElementById('searchInput').addEventListener('input', (e) => {
         filterContent(e.target.value);
     });
 
+    // event mta3 sort dropdown
     document.getElementById('sortSelect').addEventListener('change', (e) => {
         renderContent();
     });
 
-    // Navbar filter event listeners
+    // buttons mta3 navbar
     document.getElementById('allBtn').addEventListener('click', () => {
         filterMode = "all";
         setActiveNavBtn('allBtn');
@@ -432,12 +439,13 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    // warri button li active fi navbar
     function setActiveNavBtn(id) {
         document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
         document.getElementById(id).classList.add('active');
     }
 
-    // Initial render
+    // awel render ki t7al page
     setActiveNavBtn('allBtn');
     renderContent();
 });
